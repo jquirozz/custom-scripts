@@ -33,18 +33,18 @@ htb() {
     fi
 
     if grep -qiw "$box_name" /etc/hosts; then
-        echo "[*] $box_name.htb already exists in /etc/hosts. Updating IP to $box_ip..."
+        echo "[*] Updating $box_name.htb IP in /etc/hosts..."
         sudo sed -i -E "s/^.*\b$box_name\.htb\b.*/$box_ip ${box_name}.htb/I" /etc/hosts
     else
         echo "[*] Adding $box_name.htb to /etc/hosts..."
         echo "$box_ip ${box_name}.htb" | sudo tee -a /etc/hosts > /dev/null
     fi
 
-    echo "[*] Creating work directory..."
+    echo "[*] Preparing work directory..."
     mkdir -p $box_dir/{nmap,scans,exploits,flags}
     cd $box_dir || return 1
 
-    echo "export RHOST='$box_ip'; export LHOST='$lhost'" > "$HOME/.custom_env"
+    echo "export BOX='$box_name' RHOST='$box_ip'; export LHOST='$lhost'" > "$HOME/.custom_env"
 
     source "$HOME/.custom_env"
 
