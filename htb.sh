@@ -41,7 +41,7 @@ htb() {
     fi
 
     echo "[*] Preparing work directory..."
-    mkdir -p $box_dir/{nmap,scans,exploits,flags}
+    mkdir -p $box_dir/{nmap,scans,exploits,content}
     cd $box_dir || return 1
 
     echo "export BOX='$box_name' RHOST='$box_ip'; export LHOST='$lhost'" > "$HOME/.custom_env"
